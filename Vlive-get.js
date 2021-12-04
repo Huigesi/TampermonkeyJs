@@ -84,7 +84,7 @@
                 if(xhr.responseURL.indexOf('/rmcnmv/vod/play')!==-1){
                     let list=JSON.parse(xhr.response)
 
-                    let url=arrayEnd(list.videos.list).source
+                    let url=getMaxSize(list.videos.list).source
                     GM_setValue('video_url'+videoid,url)
                 }
             }
@@ -99,6 +99,17 @@
             }
         }
         return min;
+    }
+    function getMaxSize(arrs){
+        var min = Number(arrs[0].size);
+        var videourl=arrs[0];
+        for(var i = 1, ilen = arrs.length; i < ilen; i+=1) {
+            if(Number(arrs[i].size) > min) {
+                min = Number(arrs[i].size);
+                videourl=arrs[i];
+            }
+        }
+        return videourl;
     }
     function arrayEnd(arrs){
         var end = arrs[arrs.length-1]
