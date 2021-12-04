@@ -84,7 +84,7 @@
                 if(xhr.responseURL.indexOf('/rmcnmv/vod/play')!==-1){
                     let list=JSON.parse(xhr.response)
 
-                    let url=arrayMax(list.videos.list).source
+                    let url=arrayEnd(list.videos.list).source
                     GM_setValue('video_url'+videoid,url)
                 }
             }
@@ -99,6 +99,10 @@
             }
         }
         return min;
+    }
+    function arrayEnd(arrs){
+        var end = arrs[arrs.length-1]
+        return end;
     }
     function createCustomBtn(svg, iconColor, className, marginLeft) {
         let newBtn = document.createElement("button");
